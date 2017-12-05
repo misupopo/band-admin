@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import {LiveComponent} from './live.component';
-import {CreateComponent} from './create/create.component';
+import { LiveComponent } from './live.component';
+import { CreateComponent } from './components/create/create.component';
 
 const routes: Routes = [{
     path: '',
@@ -11,7 +11,7 @@ const routes: Routes = [{
         {
             path: 'create',
             component: CreateComponent,
-        }
+        },
     ],
 }];
 
@@ -24,5 +24,5 @@ export class LiveRoutingModule {
 
 export const routedComponents = [
     LiveComponent,
-    CreateComponent
+    CreateComponent,
 ];

@@ -1,0 +1,73 @@
+<nb-card>
+    <nb-card-header>
+        Create
+    </nb-card-header>
+    <nb-card-body>
+        <form #f="ngForm" [formGroup]="form"
+              (ngSubmit)="onSubmit(form.value)" novalidate>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">タイトル</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="title"
+                           class="form-control"
+                           name="title"
+                           placeholder="title">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">日付</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="date"
+                           class="form-control"
+                           name="date"
+                           placeholder="date">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">インフォメーション</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="information"
+                           class="form-control"
+                           name="information"
+                           placeholder="information">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">時間</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="time"
+                           class="form-control"
+                           name="time"
+                           placeholder="time">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">チケット</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="ticket"
+                           class="form-control"
+                           name="ticket"
+                           placeholder="ticket">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">出演者</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="performer"
+                           class="form-control"
+                           name="performer"
+                           placeholder="performer">
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
