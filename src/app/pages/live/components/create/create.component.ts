@@ -13,8 +13,10 @@ export class CreateComponent {
     public title: AbstractControl;
     public date: AbstractControl;
     public information: AbstractControl;
-    public time: AbstractControl;
-    public ticket: AbstractControl;
+    public enter_time: AbstractControl;
+    public start_time: AbstractControl;
+    public advance_sale_ticket: AbstractControl;
+    public day_ticket: AbstractControl;
     public performer: AbstractControl;
 
     constructor(private formBuilder: FormBuilder,
@@ -23,29 +25,41 @@ export class CreateComponent {
             'title': '',
             'date': '',
             'information': '',
-            'time': '',
-            'ticket': '',
+            'enter_time': '',
+            'start_time': '',
+            'advance_sale_ticket': '',
+            'day_ticket': '',
             'performer': '',
         });
 
         this.title = this.form.controls['title'];
         this.date = this.form.controls['date'];
         this.information = this.form.controls['information'];
-        this.time = this.form.controls['time'];
-        this.ticket = this.form.controls['ticket'];
+        this.enter_time = this.form.controls['enter_time'];
+        this.start_time = this.form.controls['start_time'];
+        this.advance_sale_ticket = this.form.controls['advance_sale_ticket'];
+        this.day_ticket = this.form.controls['day_ticket'];
         this.performer = this.form.controls['performer'];
     }
 
     public onSubmit(values: any): void {
         if (this.form.valid) {
+
+            const performers = values.performer.split(', ').reduce((collection, performerData) => {
+                collection.push(performerData);
+                return collection;
+            }, []);
+
             this.createData({
                 params: {
                     title: values.title,
                     date: values.date,
                     information: values.information,
-                    time: values.time,
-                    ticket: values.ticket,
-                    performer: values.performer,
+                    enter_time: values.enter_time,
+                    start_time: values.start_time,
+                    advance_sale_ticket: values.advance_sale_ticket,
+                    day_ticket: values.day_ticket,
+                    performer: performers,
                 },
                 action: 'live/create',
             }).subscribe((response: any) => {

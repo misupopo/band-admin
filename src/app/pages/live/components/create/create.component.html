@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">インフォメーション</label>
+                <label class="col-sm-3 col-form-label">詳細</label>
                 <div class="col-sm-9">
                     <input type="text"
                            [formControl]="information"
@@ -36,23 +36,43 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">時間</label>
+                <label class="col-sm-3 col-form-label">開場時間</label>
                 <div class="col-sm-9">
                     <input type="text"
-                           [formControl]="time"
+                           [formControl]="enter_time"
                            class="form-control"
-                           name="time"
-                           placeholder="time">
+                           name="enter_time"
+                           placeholder="enter_time">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">チケット</label>
+                <label class="col-sm-3 col-form-label">開演時間</label>
                 <div class="col-sm-9">
                     <input type="text"
-                           [formControl]="ticket"
+                           [formControl]="start_time"
                            class="form-control"
-                           name="ticket"
-                           placeholder="ticket">
+                           name="start_time"
+                           placeholder="start_time">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">前売り券</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           [formControl]="advance_sale_ticket"
+                           class="form-control"
+                           name="advance_sale_ticket"
+                           placeholder="advance_sale_ticket">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">当日券</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           [formControl]="day_ticket"
+                           class="form-control"
+                           name="day_ticket"
+                           placeholder="day_ticket">
                 </div>
             </div>
             <div class="form-group row">

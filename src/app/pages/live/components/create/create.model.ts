@@ -3,9 +3,11 @@ export class CreateModel {
         title: string;
         date: string;
         information: string;
-        time: string;
-        ticket: string;
-        performer: string;
+        enter_time: string;
+        start_time: string;
+        advance_sale_ticket: number;
+        day_ticket: number;
+        performer: any;
     };
     public action: string;
 }
