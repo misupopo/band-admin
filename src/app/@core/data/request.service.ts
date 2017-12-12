@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class RequestConfigService {
 
     private data = {
-        url: 'http://localhost:9001'
+        url: 'http://localhost:9001',
     };
 
     constructor() {

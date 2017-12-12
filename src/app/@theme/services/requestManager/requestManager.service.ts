@@ -25,4 +25,17 @@ export class RequestManager {
 
         });
     }
+
+    public requestGetAction (getData: any) {
+        this.loadingSpinnerState.setLoadingSpinnerState(true);
+
+        return this.http.get(this.requestUrl + '/' + getData.action, getData)
+            .map((response: Response) => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
+                return response.json();
+            })
+            .do((response) => {
+
+            });
+    }
 }

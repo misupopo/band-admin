@@ -33,7 +33,9 @@ import {
     TwoColumnsLayoutComponent,
 } from './layouts';
 import {
-    RequestManager
+    RequestManager,
+    CamelcaseConverter,
+    DateManager,
 } from './services';
 import {DEFAULT_THEME} from './styles/theme.default';
 import {COSMIC_THEME} from './styles/theme.cosmic';
@@ -55,7 +57,9 @@ const NB_MODULES = [
 ];
 
 const SERVICES = [
-    RequestManager
+    RequestManager,
+    CamelcaseConverter,
+    DateManager,
 ];
 
 const COMPONENTS = [
@@ -100,7 +104,7 @@ export class ThemeModule {
             ngModule: ThemeModule,
             providers: [
                 ...NB_THEME_PROVIDERS,
-                ...SERVICES
+                ...SERVICES,
             ],
         };
     }

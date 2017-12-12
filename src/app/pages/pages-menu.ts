@@ -20,8 +20,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/pages/live/create',
             },
             {
-                title: 'Form Layouts',
-                link: '/pages/forms/layouts',
+                title: 'List',
+                link: '/pages/live/list',
             },
         ],
     },
