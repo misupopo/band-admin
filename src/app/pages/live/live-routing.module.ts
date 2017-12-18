@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LiveComponent } from './live.component';
 import { CreateComponent } from './components/create/create.component';
 import { ListComponent } from './components/list/list.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 const routes: Routes = [{
     path: '',
@@ -16,6 +17,10 @@ const routes: Routes = [{
         {
             path: 'list',
             component: ListComponent,
+        },
+        {
+            path: 'detail/:id',
+            component: DetailComponent,
         },
     ],
 }];
@@ -31,4 +36,5 @@ export const routedComponents = [
     LiveComponent,
     CreateComponent,
     ListComponent,
+    DetailComponent,
 ];

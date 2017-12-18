@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListDataService } from './list.service';
 import { ListModel } from './list.model';
@@ -69,7 +70,8 @@ export class ListComponent {
 
     constructor(private listDataService: ListDataService,
                 private camelcaseConverter: CamelcaseConverter,
-                private dateManager: DateManager) {
+                private dateManager: DateManager,
+                private router: Router) {
         this.getListData({
             params: {
             },
@@ -97,6 +99,10 @@ export class ListComponent {
         } else {
             event.confirm.reject();
         }
+    }
+
+    public onUserSelectRow(userData) {
+        this.router.navigate([`/pages/live/detail/${userData.data.id}/`]);
     }
 
     private getListData(listModel: ListModel) {
