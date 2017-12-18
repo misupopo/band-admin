@@ -87,7 +87,7 @@ export class ListComponent {
                 return returnData;
             });
 
-            this.source.load(result);
+            this.source.load(this.dateManager.allListConvert(result));
         },
         error => {
         });
