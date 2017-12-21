@@ -1,0 +1,129 @@
+<nb-card>
+    <nb-card-header>
+        Create
+    </nb-card-header>
+    <nb-card-body>
+        <form #f="ngForm" [formGroup]="form"
+              (ngSubmit)="onSubmit(form.value)" novalidate>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">タイトル</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="title"
+                           class="form-control"
+                           name="title"
+                           placeholder="title">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">リリース日</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="date"
+                           class="form-control"
+                           name="date"
+                           placeholder="date">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">タイプ</label>
+                <div class="col-sm-9">
+                    <select class="form-control"
+                            [formControl]="type">
+                        <option *ngFor='let discType of discTypes'
+                                [value]="discType">{{discType}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">プロダクトナンバー</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="productNumber"
+                           class="form-control"
+                           name="productNumber"
+                           placeholder="productNumber">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">枚数</label>
+                <div class="col-sm-9 text-right">
+                    <div class="btn-group mb-15">
+                        <button type="button"
+                                class="btn btn-primary btn-icon btn-tn"
+                                (click)="addDiscNumberData()">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary btn-icon btn-tn"
+                                (click)="removeDiscNumberData()">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="mb-15" *ngFor="let discNumber of discNumberData">
+                        <input #discData
+                               type="text"
+                               class="form-control"
+                               (change)="changValue(discData.value, discNumber.id)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">プロダクトタイトル</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="productTitle"
+                           class="form-control"
+                           name="productTitle"
+                           placeholder="productTitle">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">値段</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="priceValue"
+                           class="form-control"
+                           name="priceValue"
+                           placeholder="priceValue">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">曲リスト</label>
+                <div class="col-sm-9 text-right">
+                    <div *ngFor="let discNumber of discNumberData; let discNumberIndex = index;">
+                        <div [ngClass]="{ 'dis-n' : discNumber.value === '' }">
+                            <div class="btn-group mb-15">
+                                <button type="button"
+                                        class="btn btn-primary btn-icon btn-tn"
+                                        (click)="addMusicListData(discNumber.id)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-primary btn-icon btn-tn"
+                                        (click)="removeMusicListData(discNumber.id)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <div class="discNumberTitleBox text-left">
+                                <span class="discNumberTitleBox_title">{{discNumber.value}}</span>
+                            </div>
+                            <div class="mb-15" *ngFor="let musicList of discNumber.musicList; let musicListIndex = index;">
+                                <input #musicData
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="{{discNumber.value}} {{musicListIndex + 1}}. music title"
+                                       (change)="changMusicListValue(musicData.value, discNumber.id, musicListIndex)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

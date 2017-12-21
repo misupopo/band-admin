@@ -1,0 +1,9 @@
+<nb-card>
+    <nb-card-header>
+        List
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="settings"  (userRowSelect)="onUserSelectRow($event)" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>

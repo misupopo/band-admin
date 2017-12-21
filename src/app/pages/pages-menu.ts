@@ -26,6 +26,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         ],
     },
     {
+        title: 'release',
+        icon: 'nb-star',
+        children: [
+            {
+                title: 'Create',
+                link: '/pages/release/create',
+            },
+            {
+                title: 'List',
+                link: '/pages/release/list',
+            },
+        ],
+    },
+    {
         title: 'UI Features',
         icon: 'nb-keypad',
         link: '/pages/ui-features',
@@ -75,19 +89,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         ],
     },
     {
-        title: 'Components',
-        icon: 'nb-gear',
-        children: [
-            {
-                title: 'Tree',
-                link: '/pages/components/tree',
-            }, {
-                title: 'Notifications',
-                link: '/pages/components/notifications',
-            },
-        ],
-    },
-    {
         title: 'Maps',
         icon: 'nb-location',
         children: [
@@ -120,20 +121,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
             {
                 title: 'D3',
                 link: '/pages/charts/d3',
-            },
-        ],
-    },
-    {
-        title: 'Editors',
-        icon: 'nb-title',
-        children: [
-            {
-                title: 'TinyMCE',
-                link: '/pages/editors/tinymce',
-            },
-            {
-                title: 'CKEditor',
-                link: '/pages/editors/ckeditor',
             },
         ],
     },
