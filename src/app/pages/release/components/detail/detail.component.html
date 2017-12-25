@@ -13,7 +13,7 @@
                        [formControl]="title"
                        class="form-control">
             </div>
-            <label>日付</label>
+            <label>リリース日</label>
             <div class="input-group">
                 <input type="text"
                        placeholder="date"
@@ -21,53 +21,88 @@
                        [formControl]="date"
                        class="form-control">
             </div>
-            <label>詳細</label>
+            <label>タイプ</label>
             <div class="input-group">
                 <input type="text"
-                       placeholder="information"
-                       [(ngModel)]="informationModel"
-                       [formControl]="information"
+                       placeholder="type"
+                       [(ngModel)]="typeModel"
+                       [formControl]="type"
                        class="form-control">
             </div>
-            <label>開場時間</label>
+            <label>プロダクトナンバー</label>
             <div class="input-group">
                 <input type="text"
-                       placeholder="enterTime"
-                       [(ngModel)]="enterTimeModel"
-                       [formControl]="enterTime"
+                       placeholder="productNumber"
+                       [(ngModel)]="productNumberModel"
+                       [formControl]="productNumber"
                        class="form-control">
             </div>
-            <label>開催時間</label>
+            <label>プロダクトタイトル</label>
             <div class="input-group">
                 <input type="text"
-                       placeholder="startTime"
-                       [(ngModel)]="startTimeModel"
-                       [formControl]="startTime"
+                       placeholder="productTitle"
+                       [(ngModel)]="productTitleModel"
+                       [formControl]="productTitle"
                        class="form-control">
             </div>
-            <label>前売り券</label>
+            <label>値段</label>
             <div class="input-group">
-                <input type="text"
-                       placeholder="advanceSaleTicket"
-                       [(ngModel)]="advanceSaleTicketModel"
-                       [formControl]="advanceSaleTicket"
+                <input type="number"
+                       placeholder="priceValue"
+                       [(ngModel)]="priceValueModel"
+                       [formControl]="priceValue"
                        class="form-control">
             </div>
-            <label>当日券</label>
-            <div class="input-group">
-                <input type="text"
-                       placeholder="dayTicket"
-                       [(ngModel)]="dayTicketModel"
-                       [formControl]="dayTicket"
-                       class="form-control">
+            <label>枚数</label>
+            <div class="input-group detailListBox text-right">
+                <div class="btn-group mb-15">
+                    <button type="button"
+                            class="btn btn-primary btn-icon btn-tn"
+                            (click)="addDiscNumberData()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button type="button"
+                            class="btn btn-primary btn-icon btn-tn"
+                            (click)="removeDiscNumberData()">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <div class="mb-15" *ngFor="let discNumber of discNumberDataModel; let discNumberIndex = index;">
+                    <input #discData
+                           type="text"
+                           placeholder="discNumber"
+                           [value]="discNumber"
+                           (change)="changValue(discData.value, discNumberIndex)"
+                           class="form-control">
+                </div>
             </div>
-            <label>出演者</label>
-            <div class="input-group">
-                <input type="text"
-                       placeholder="performer"
-                       [(ngModel)]="performerModel"
-                       [formControl]="performer"
-                       class="form-control">
+            <label>曲リスト</label>
+            <div class="input-group detailListBox text-right">
+                <div class="mb-15" *ngFor="let musicList of musicListDataModel; let musicListIndex = index;">
+                    <div class="btn-group mb-15">
+                        <button type="button"
+                                class="btn btn-primary btn-icon btn-tn"
+                                (click)="addMusicListData(musicListIndex)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary btn-icon btn-tn"
+                                (click)="removeMusicListData(musicListIndex)">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="discNumberTitleBox text-left">
+                        <span class="discNumberTitleBox_title">{{discNumberDataModel[musicListIndex]}}</span>
+                    </div>
+                    <div class="mb-15" *ngFor="let music of musicList; let musicIndex = index;">
+                        <input #musicData
+                               type="text"
+                               placeholder="music"
+                               value="{{music}}"
+                               (change)="changMusicListValue(musicData.value, musicListIndex, musicIndex)"
+                               class="form-control">
+                    </div>
+                </div>
             </div>
             <div class="text-right">
                 <button type="submit" class="btn btn-hero-primary">更新</button>

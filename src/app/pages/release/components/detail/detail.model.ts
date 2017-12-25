@@ -10,12 +10,12 @@ export class UpdateDetailModel {
         id: string;
         title: string;
         date: string;
-        information: string;
-        enter_time: string;
-        start_time: string;
-        advance_sale_ticket: number;
-        day_ticket: number;
-        performer: any;
+        type: string;
+        product_number: string;
+        disc_number: any;
+        product_title: string;
+        price_value: number;
+        music_list: any;
     };
     public action: string;
 }

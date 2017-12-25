@@ -6,7 +6,7 @@ export class CreateModel {
         product_number: string;
         disc_number: any;
         product_title: string;
-        price: number;
+        price_value: number;
         music_list: any;
     };
     public action: string;

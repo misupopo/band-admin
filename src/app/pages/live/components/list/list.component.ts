@@ -6,7 +6,7 @@ import { ListModel } from './list.model';
 import { CamelcaseConverter, DateManager} from '../../../../@theme/services';
 
 @Component({
-    selector: 'ngx-create',
+    selector: 'ngx-list',
     styleUrls: ['./list.component.scss'],
     templateUrl: './list.component.html',
 })

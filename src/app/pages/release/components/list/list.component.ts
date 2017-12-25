@@ -6,7 +6,7 @@ import { ListModel } from './list.model';
 import { CamelcaseConverter, DateManager} from '../../../../@theme/services';
 
 @Component({
-    selector: 'ngx-create',
+    selector: 'ngx-list',
     styleUrls: ['./list.component.scss'],
     templateUrl: './list.component.html',
 })
@@ -32,36 +32,24 @@ export class ListComponent {
                 type: 'string',
             },
             date: {
-                title: '日付',
+                title: 'リリース日',
                 type: 'string',
             },
-            information: {
-                title: '詳細',
+            type: {
+                title: 'タイプ',
                 type: 'string',
             },
-            enterTime: {
-                title: '開場時間',
+            productNumber: {
+                title: 'プロダクトナンバー',
                 type: 'string',
             },
-            startTime: {
-                title: '開催時間',
+            productTitle: {
+                title: 'プロダクトタイトル',
                 type: 'string',
             },
-            advanceSaleTicket: {
-                title: '前売り券',
+            priceValue: {
+                title: '値段',
                 type: 'number',
-            },
-            dayTicket: {
-                title: '当日券',
-                type: 'number',
-            },
-            performer: {
-                title: '出演者',
-                type: 'number',
-            },
-            createAt: {
-                title: '作成時間',
-                type: 'string',
             },
         },
     };
@@ -75,7 +63,7 @@ export class ListComponent {
         this.getListData({
             params: {
             },
-            action: 'live/list',
+            action: 'release/list',
         }).subscribe((response: any) => {
             const result = response.result.map((listData) => {
                 const returnData = {};
@@ -102,7 +90,7 @@ export class ListComponent {
     }
 
     public onUserSelectRow(userData) {
-        this.router.navigate([`/pages/live/detail/${userData.data.id}/`]);
+        this.router.navigate([`/pages/release/detail/${userData.data.id}/`]);
     }
 
     private getListData(listModel: ListModel) {

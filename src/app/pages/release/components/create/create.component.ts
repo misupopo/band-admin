@@ -143,7 +143,7 @@ export class CreateComponent {
                     product_number: values.productNumber,
                     disc_number: discNumber,
                     product_title: values.productTitle,
-                    price: values.price,
+                    price_value: values.priceValue,
                     music_list: musicList,
                 },
                 action: 'release/create',
