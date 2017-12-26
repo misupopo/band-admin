@@ -16,6 +16,8 @@ export class UpdateDetailModel {
         advance_sale_ticket: number;
         day_ticket: number;
         performer: any;
+        article_title: string;
+        article_content: string;
     };
     public action: string;
 }

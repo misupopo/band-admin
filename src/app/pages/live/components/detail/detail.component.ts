@@ -19,6 +19,8 @@ export class DetailComponent {
     @Input('advanceSaleTicketModel') advanceSaleTicketModel: string;
     @Input('dayTicketModel') dayTicketModel: string;
     @Input('performerModel') performerModel: string;
+    @Input('articleTitleModel') articleTitleModel: any;
+    @Input('articleContentModel') articleContentModel: any;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -28,6 +30,8 @@ export class DetailComponent {
     public advanceSaleTicket: AbstractControl;
     public dayTicket: AbstractControl;
     public performer: AbstractControl;
+    public articleTitle: AbstractControl;
+    public articleContent: AbstractControl;
     private detailId: string;
 
     constructor(private detailDataService: DetailDataService,
@@ -43,6 +47,8 @@ export class DetailComponent {
             'advanceSaleTicket': '',
             'dayTicket': '',
             'performer': '',
+            'articleTitle': '',
+            'articleContent': '',
         });
 
         this.title = this.form.controls['title'];
@@ -53,6 +59,8 @@ export class DetailComponent {
         this.advanceSaleTicket = this.form.controls['advanceSaleTicket'];
         this.dayTicket = this.form.controls['dayTicket'];
         this.performer = this.form.controls['performer'];
+        this.articleTitle = this.form.controls['articleTitle'];
+        this.articleContent = this.form.controls['articleContent'];
 
         this.activatedRoute.params.subscribe((param: any) => {
             this.detailId = param.id;
@@ -72,6 +80,8 @@ export class DetailComponent {
                 this.startTimeModel = this.dateManager.convertTime(new Date(detailData.start_time));
                 this.advanceSaleTicketModel = detailData.advance_sale_ticket;
                 this.dayTicketModel = detailData.day_ticket;
+                this.articleTitleModel = detailData.article_title;
+                this.articleContentModel = detailData.article_content;
 
                 let performers = '';
 
@@ -106,6 +116,8 @@ export class DetailComponent {
                     advance_sale_ticket: values.advanceSaleTicket,
                     day_ticket: values.dayTicket,
                     performer: performers,
+                    article_title: this.articleTitleModel,
+                    article_content: this.articleContentModel,
                 },
                 action: 'live/detail',
             }).subscribe((response: any) => {

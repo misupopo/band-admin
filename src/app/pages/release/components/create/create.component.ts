@@ -18,6 +18,8 @@ export class CreateComponent {
     public productNumber: AbstractControl;
     public productTitle: AbstractControl;
     public priceValue: AbstractControl;
+    public articleTitle: AbstractControl;
+    public articleContent: AbstractControl;
     public discTypes = [
         'single',
         'album',
@@ -57,6 +59,8 @@ export class CreateComponent {
             'productNumber': '',
             'productTitle': '',
             'priceValue': '',
+            'articleTitle': '',
+            'articleContent': '',
         });
 
         this.title = this.form.controls['title'];
@@ -65,6 +69,8 @@ export class CreateComponent {
         this.productNumber = this.form.controls['productNumber'];
         this.productTitle = this.form.controls['productTitle'];
         this.priceValue = this.form.controls['priceValue'];
+        this.articleTitle = this.form.controls['articleTitle'];
+        this.articleContent = this.form.controls['articleContent'];
 
         this.files = []; // local uploading files array
         this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
@@ -148,28 +154,8 @@ export class CreateComponent {
                 return data.musicList;
             });
 
-            // const createData = this.createData({
-            //     params: {
-            //         title: values.title,
-            //         date: values.date,
-            //         type: values.type,
-            //         product_number: values.productNumber,
-            //         disc_number: discNumber,
-            //         product_title: values.productTitle,
-            //         price_value: values.priceValue,
-            //         music_list: musicList,
-            //     },
-            //     action: 'release/create',
-            // }).subscribe((response: any) => {
-            // },
-            // error => {
-            // });
-
-            const event: any = {
-                type: 'uploadAll',
-                url: 'http://localhost:9001/release/create',
-                method: 'POST',
-                data: {
+            this.createData({
+                params: {
                     title: values.title,
                     date: values.date,
                     type: values.type,
@@ -178,10 +164,24 @@ export class CreateComponent {
                     product_title: values.productTitle,
                     price_value: values.priceValue,
                     music_list: musicList,
+                    article_title: values.articleTitle,
+                    article_content: values.articleContent,
                 },
-            };
+                action: 'release/create',
+            }).subscribe((response: any) => {
+                const event: any = {
+                    type: 'uploadAll',
+                    url: 'http://localhost:9001/release/create/image',
+                    method: 'POST',
+                    data: {
+                        id: response.result.insertedIds[0],
+                    },
+                };
 
-            this.uploadInput.emit(event);
+                this.uploadInput.emit(event);
+            },
+            error => {
+            });
         }
     }
 

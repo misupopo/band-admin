@@ -18,6 +18,8 @@ export class CreateComponent {
     public advance_sale_ticket: AbstractControl;
     public day_ticket: AbstractControl;
     public performer: AbstractControl;
+    public articleTitle: AbstractControl;
+    public articleContent: AbstractControl;
 
     constructor(private formBuilder: FormBuilder,
                 private createDataService: CreateDataService) {
@@ -30,6 +32,8 @@ export class CreateComponent {
             'advance_sale_ticket': '',
             'day_ticket': '',
             'performer': '',
+            'articleTitle': '',
+            'articleContent': '',
         });
 
         this.title = this.form.controls['title'];
@@ -40,6 +44,8 @@ export class CreateComponent {
         this.advance_sale_ticket = this.form.controls['advance_sale_ticket'];
         this.day_ticket = this.form.controls['day_ticket'];
         this.performer = this.form.controls['performer'];
+        this.articleTitle = this.form.controls['articleTitle'];
+        this.articleContent = this.form.controls['articleContent'];
     }
 
     public onSubmit(values: any): void {
@@ -60,6 +66,8 @@ export class CreateComponent {
                     advance_sale_ticket: values.advance_sale_ticket,
                     day_ticket: values.day_ticket,
                     performer: performers,
+                    article_title: values.articleTitle,
+                    article_content: values.articleContent,
                 },
                 action: 'live/create',
             }).subscribe((response: any) => {

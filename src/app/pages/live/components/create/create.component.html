@@ -85,6 +85,26 @@
                            placeholder="performer">
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">記事タイトル</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="articleTitle"
+                           class="form-control"
+                           name="articleTitle"
+                           placeholder="articleTitle">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">記事内容</label>
+                <div class="col-sm-9">
+                    <textarea type="text"
+                              [formControl]="articleContent"
+                              class="form-control"
+                              name="articleContent"
+                              placeholder="articleContent"></textarea>
+                </div>
+            </div>
             <div class="text-right">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

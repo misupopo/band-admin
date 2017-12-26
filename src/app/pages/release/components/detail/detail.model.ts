@@ -16,6 +16,9 @@ export class UpdateDetailModel {
         product_title: string;
         price_value: number;
         music_list: any;
+        article_title: string;
+        article_content: string;
+        file_name: string;
     };
     public action: string;
 }

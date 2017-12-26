@@ -18,6 +18,8 @@ export class DetailComponent implements AfterViewInit {
     @Input('productTitleModel') productTitleModel: string;
     @Input('priceValueModel') priceValueModel: string;
     @Input('musicDataModel') musicDataModel: any;
+    @Input('articleTitleModel') articleTitleModel: any;
+    @Input('articleContentModel') articleContentModel: any;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -25,9 +27,12 @@ export class DetailComponent implements AfterViewInit {
     public productNumber: AbstractControl;
     public productTitle: AbstractControl;
     public priceValue: AbstractControl;
+    public articleTitle: AbstractControl;
+    public articleContent: AbstractControl;
     public discNumberDataModel: any;
     public musicListDataModel: any;
     public musicListData: any;
+    public fileName: string;
     private detailId: string;
 
     constructor(private detailDataService: DetailDataService,
@@ -41,6 +46,8 @@ export class DetailComponent implements AfterViewInit {
             'productNumber': '',
             'productTitle': '',
             'priceValue': '',
+            'articleTitle': '',
+            'articleContent': '',
         });
 
         this.title = this.form.controls['title'];
@@ -49,6 +56,8 @@ export class DetailComponent implements AfterViewInit {
         this.productNumber = this.form.controls['productNumber'];
         this.productTitle = this.form.controls['productTitle'];
         this.priceValue = this.form.controls['priceValue'];
+        this.articleTitle = this.form.controls['articleTitle'];
+        this.articleContent = this.form.controls['articleContent'];
     }
 
     ngAfterViewInit() {
@@ -74,6 +83,10 @@ export class DetailComponent implements AfterViewInit {
                 this.musicListData = detailData.music_list.map((data) => {
                     return Object.assign([], data);
                 });
+
+                this.articleTitleModel = detailData.article_title;
+                this.articleContentModel = detailData.article_content;
+                this.fileName = detailData.file_name;
             });
         });
     }
@@ -127,6 +140,9 @@ export class DetailComponent implements AfterViewInit {
                     price_value: values.priceValue,
                     disc_number: this.discNumberDataModel,
                     music_list: this.musicListData,
+                    article_title: this.articleTitleModel,
+                    article_content: this.articleContentModel,
+                    file_name: this.fileName,
                 },
                 action: 'release/detail',
             }).subscribe((response: any) => {
