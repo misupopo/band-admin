@@ -9,7 +9,8 @@ import {AnalyticsService} from './@core/utils/analytics.service';
 
 @Component({
     selector: 'ngx-app',
-    template: '<router-outlet></router-outlet><ngx-loading [show]="loading" [config]="{ backdropBorderRadius: \'14px\' }"></ngx-loading>',
+    styleUrls: ['./app.component.scss'],
+    templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
 

@@ -72,7 +72,7 @@ export class DetailComponent implements AfterViewInit {
                 this.discNumberDataModel = detailData.disc_number;
                 this.musicListDataModel = detailData.music_list;
                 this.musicListData = detailData.music_list.map((data) => {
-                    return Object.assign([], data)
+                    return Object.assign([], data);
                 });
             });
         });

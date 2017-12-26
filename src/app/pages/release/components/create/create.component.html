@@ -31,7 +31,8 @@
                     <select class="form-control"
                             [formControl]="type">
                         <option *ngFor='let discType of discTypes'
-                                [value]="discType">{{discType}}</option>
+                                [value]="discType">{{discType}}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -110,12 +111,70 @@
                             <div class="discNumberTitleBox text-left">
                                 <span class="discNumberTitleBox_title">{{discNumber.value}}</span>
                             </div>
-                            <div class="mb-15" *ngFor="let musicList of discNumber.musicList; let musicListIndex = index;">
+                            <div class="mb-15"
+                                 *ngFor="let musicList of discNumber.musicList; let musicListIndex = index;">
                                 <input #musicData
                                        type="text"
                                        class="form-control"
                                        placeholder="{{discNumber.value}} {{musicListIndex + 1}}. music title"
                                        (change)="changMusicListValue(musicData.value, discNumber.id, musicListIndex)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">CDジャケット</label>
+                <div class="hero is-fullheight">
+                    <div class="hero-body">
+                        <div class="container">
+                            <div class="columns is-multiline">
+                                <div class="column is-8 is-offset-2">
+                                    <div class="drop-container" ngFileDrop [options]="options"
+                                         (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                                        <p>
+                                            Drag a file here or
+                                            <label class="upload-button">
+                                                <input type="file" ngFileSelect [options]="options"
+                                                       (uploadOutput)="onUploadOutput($event)"
+                                                       [uploadInput]="uploadInput" multiple>
+                                                browse
+                                            </label>
+                                            to upload.
+                                        </p>
+                                        <div class="upload-items">
+                                            <div class="upload-item" *ngFor="let file of files; let i = index;">
+                                      <span class="filename">
+                                        <span>{{ file.name }} ({{ file.id }}) - {{ file.progress?.data?.percentage }}%</span>
+                                        <span>uploading with {{ file.progress?.data?.speedHuman }}</span>
+                                        <span>ETA {{ file.progress?.data?.etaHuman }}</span>
+                                      </span>
+                                                <div class="progress">
+                                                <span class="bar"
+                                                      [style.width]="file?.progress?.data?.percentage + '%'"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src="{{imagePreview}}">
+                                </div>
+                                <!--<div class="column is-8 is-offset-2">-->
+                                    <!--<div class="upload-items">-->
+                                        <!--<div class="upload-item" *ngFor="let file of files; let i = index;">-->
+                                      <!--<span class="filename">-->
+                                        <!--<span>{{ file.name }} ({{ file.id }}) - {{ file.progress?.data?.percentage }}%</span>-->
+                                        <!--<span>uploading with {{ file.progress?.data?.speedHuman }}</span>-->
+                                        <!--<span>ETA {{ file.progress?.data?.etaHuman }}</span>-->
+                                      <!--</span>-->
+                                            <!--<div class="progress">-->
+                                                <!--<span class="bar"-->
+                                                      <!--[style.width]="file?.progress?.data?.percentage + '%'"></span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>

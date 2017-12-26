@@ -7,11 +7,14 @@ import { CreateDataService } from './components/create/create.service';
 import { ListDataService } from './components/list/list.service';
 import { DetailDataService } from './components/detail/detail.service';
 
+import { NgUploaderModule } from 'ngx-uploader';
+
 @NgModule({
     imports: [
         ThemeModule,
         LiveRoutingModule,
         Ng2SmartTableModule,
+        NgUploaderModule,
     ],
     declarations: [
         ...routedComponents,
