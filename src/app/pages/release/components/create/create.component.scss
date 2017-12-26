@@ -41,38 +41,36 @@ $border: #D2D6DA;
             }
         }
     }
+}
 
-    .upload-items {
-        display: block;
+.upload-items {
+    display: block;
+    width: 100%;
+
+    .upload-item {
         width: 100%;
+        display: block;
 
-        .upload-item {
-            width: 100%;
+        .filename {
             display: block;
-            margin-top: 20px;
+            padding: 0 0 5px 5px;
+        }
 
-            .filename {
-                display: block;
-                padding: 0 0 5px 5px;
-                color: $text;
-            }
+        .progress {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 15px;
+            border: 1px solid $purple;
+            border-radius: 2px;
+        }
 
-            .progress {
-                display: block;
-                position: relative;
-                width: 100%;
-                height: 15px;
-                border: 1px solid $purple;
-                border-radius: 2px;
-            }
-
-            .bar {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 15px;
-                background: $purple;
-            }
+        .bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 15px;
+            background: $purple;
         }
     }
 }

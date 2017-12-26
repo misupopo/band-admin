@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { CreateDataService } from './create.service';
 import { CreateModel } from './create.model';
@@ -10,6 +10,7 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions }
     templateUrl: './create.component.html',
 })
 export class CreateComponent {
+    @ViewChild('imageLoader') imageLoader: any;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -166,7 +167,7 @@ export class CreateComponent {
 
             const event: any = {
                 type: 'uploadAll',
-                url: 'http://localhost:9001/release/image',
+                url: 'http://localhost:9001/release/create',
                 method: 'POST',
                 data: {
                     title: values.title,
@@ -190,9 +191,8 @@ export class CreateComponent {
     }
 
     onUploadOutput(output: UploadOutput): void {
-        console.log(output);
-
-        if (output.type === 'allAddedToQueue') { // when all files added in queue
+        // when all files added in queue
+        if (output.type === 'allAddedToQueue') {
 
         } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') {
             // add file to array when added
@@ -201,7 +201,6 @@ export class CreateComponent {
                 this.imagePreview = response;
                 this.files.push(output.file);
             });
-            // this.files.push(output.file);
         } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
             // update current data in files array for uploading file
             const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
@@ -223,25 +222,9 @@ export class CreateComponent {
         return new Promise(resolve => {
             fileReader.readAsDataURL(file);
             fileReader.onload = function (e: any) {
-
-                console.log(e.target.result);
-
                 resolve(e.target.result);
-            }
+            };
         });
-    }
-
-    startUpload(values): void {
-        const event: UploadInput = {
-            type: 'uploadAll',
-            url: 'http://localhost:9001/release/image',
-            method: 'POST',
-            data: {
-                test: values.title,
-            },
-        };
-
-        this.uploadInput.emit(event);
     }
 
     cancelUpload(id: string): void {
@@ -250,6 +233,8 @@ export class CreateComponent {
 
     removeFile(id: string): void {
         this.uploadInput.emit({ type: 'remove', id: id });
+        this.imagePreview = null;
+        this.imageLoader.nativeElement.value = '';
     }
 
     removeAllFiles(): void {
