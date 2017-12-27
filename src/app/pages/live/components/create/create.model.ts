@@ -2,6 +2,7 @@ export class CreateModel {
     public params: {
         title: string;
         date: string;
+        venue: string;
         information: string;
         enter_time: string;
         start_time: string;

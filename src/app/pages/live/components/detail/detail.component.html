@@ -21,13 +21,20 @@
                        [formControl]="date"
                        class="form-control">
             </div>
-            <label>詳細</label>
+            <label>会場場所</label>
             <div class="input-group">
                 <input type="text"
+                       placeholder="venue"
+                       [(ngModel)]="venueModel"
+                       [formControl]="venue"
+                       class="form-control">
+            </div>
+            <label>詳細</label>
+            <div class="input-group">
+                <textarea type="text"
                        placeholder="information"
                        [(ngModel)]="informationModel"
-                       [formControl]="information"
-                       class="form-control">
+                       [formControl]="information" class="form-control"></textarea>
             </div>
             <label>開場時間</label>
             <div class="input-group">

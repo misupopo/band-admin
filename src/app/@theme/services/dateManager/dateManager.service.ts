@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { sprintf } from 'sprintf-js';
+import * as moment from 'moment';
 
 @Injectable()
 export class DateManager {
@@ -20,12 +21,15 @@ export class DateManager {
     }
 
     public convertTime(timeValue: Date) {
-        return sprintf('%d/%d/%d %02d:%02d:%02d',
-            timeValue.getFullYear(),
-            (timeValue.getMonth() + 1),
-            timeValue.getDate(),
-            timeValue.getHours(),
-            timeValue.getMinutes(),
-            timeValue.getSeconds());
+
+        return moment(timeValue).utc().format('YYYY/MM/DD HH:mm:ss');
+
+        // return sprintf('%d/%d/%d %02d:%02d:%02d',
+        //     timeValue.getFullYear(),
+        //     (timeValue.getMonth() + 1),
+        //     timeValue.getDate(),
+        //     timeValue.getHours(),
+        //     timeValue.getMinutes(),
+        //     timeValue.getSeconds());
     }
 }

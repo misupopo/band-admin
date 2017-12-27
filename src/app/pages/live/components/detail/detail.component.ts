@@ -13,6 +13,7 @@ import { DateManager} from '../../../../@theme/services';
 export class DetailComponent {
     @Input('titleModel') titleModel: string;
     @Input('dateModel') dateModel: string;
+    @Input('venueModel') venueModel: string;
     @Input('informationModel') informationModel: string;
     @Input('enterTimeModel') enterTimeModel: string;
     @Input('startTimeModel') startTimeModel: string;
@@ -24,6 +25,7 @@ export class DetailComponent {
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
+    public venue: AbstractControl;
     public information: AbstractControl;
     public enterTime: AbstractControl;
     public startTime: AbstractControl;
@@ -41,6 +43,7 @@ export class DetailComponent {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
+            'venue': '',
             'information': '',
             'enterTime': '',
             'startTime': '',
@@ -53,6 +56,7 @@ export class DetailComponent {
 
         this.title = this.form.controls['title'];
         this.date = this.form.controls['date'];
+        this.venue = this.form.controls['venue'];
         this.information = this.form.controls['information'];
         this.enterTime = this.form.controls['enterTime'];
         this.startTime = this.form.controls['startTime'];
@@ -75,6 +79,7 @@ export class DetailComponent {
 
                 this.titleModel = detailData.title;
                 this.dateModel = this.dateManager.convertTime(new Date(detailData.date));
+                this.venueModel = detailData.venue;
                 this.informationModel = detailData.information;
                 this.enterTimeModel = this.dateManager.convertTime(new Date(detailData.enter_time));
                 this.startTimeModel = this.dateManager.convertTime(new Date(detailData.start_time));
@@ -110,6 +115,7 @@ export class DetailComponent {
                     id: this.detailId,
                     title: values.title,
                     date: values.date,
+                    venue: values.venue,
                     information: values.information,
                     enter_time: values.enterTime,
                     start_time: values.startTime,

@@ -12,6 +12,7 @@ export class CreateComponent {
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
+    public venue: AbstractControl;
     public information: AbstractControl;
     public enter_time: AbstractControl;
     public start_time: AbstractControl;
@@ -26,6 +27,7 @@ export class CreateComponent {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
+            'venue': '',
             'information': '',
             'enter_time': '',
             'start_time': '',
@@ -38,6 +40,7 @@ export class CreateComponent {
 
         this.title = this.form.controls['title'];
         this.date = this.form.controls['date'];
+        this.venue = this.form.controls['venue'];
         this.information = this.form.controls['information'];
         this.enter_time = this.form.controls['enter_time'];
         this.start_time = this.form.controls['start_time'];
@@ -60,6 +63,7 @@ export class CreateComponent {
                 params: {
                     title: values.title,
                     date: values.date,
+                    venue: values.venue,
                     information: values.information,
                     enter_time: values.enter_time,
                     start_time: values.start_time,
