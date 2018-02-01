@@ -2,9 +2,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoadingSpinnerState } from './loadingSpinner.state';
+import { ModalState } from './modal.state';
 
 const SERVICES = [
-    LoadingSpinnerState
+    LoadingSpinnerState,
+    ModalState,
 ];
 
 @NgModule({

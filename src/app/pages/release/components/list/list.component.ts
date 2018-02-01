@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListDataService } from './list.service';
 import { ListModel } from './list.model';
 import { CamelcaseConverter, DateManager} from '../../../../@theme/services';
+import { ModalBasicComponent } from '../../../../@theme/components/';
 
 @Component({
     selector: 'ngx-list',
@@ -11,6 +12,9 @@ import { CamelcaseConverter, DateManager} from '../../../../@theme/services';
     templateUrl: './list.component.html',
 })
 export class ListComponent {
+
+    @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
+
     public settings = {
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
@@ -81,16 +85,16 @@ export class ListComponent {
         });
     }
 
-    public onDeleteConfirm(event): void {
-        if (window.confirm('Are you sure you want to delete?')) {
-            event.confirm.resolve();
-        } else {
-            event.confirm.reject();
-        }
+    public onDeleteConfirm(content, event): void {
+        this.modalBasic.open(content, event.data, 'listRemove');
     }
 
     public onUserSelectRow(userData) {
         this.router.navigate([`/pages/release/detail/${userData.data.id}/`]);
+    }
+
+    public listDelete(data) {
+        console.log(data);
     }
 
     private getListData(listModel: ListModel) {

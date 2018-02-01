@@ -8,6 +8,7 @@ import { ListDataService } from './components/list/list.service';
 import { DetailDataService } from './components/detail/detail.service';
 
 import { NgUploaderModule } from 'ngx-uploader';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { NgUploaderModule } from 'ngx-uploader';
         CreateDataService,
         ListDataService,
         DetailDataService,
+        NgbActiveModal,
     ],
 })
 export class ReleaseModule {

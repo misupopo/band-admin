@@ -21,10 +21,12 @@ import {
 import {
     FooterComponent,
     HeaderComponent,
+    ModalBasicComponent,
     SearchInputComponent,
     ThemeSettingsComponent,
     ThemeSwitcherComponent,
     TinyMCEComponent,
+    ModalContentComponent,
 } from './components';
 import {CapitalizePipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
 import {
@@ -74,6 +76,8 @@ const COMPONENTS = [
     SampleLayoutComponent,
     ThreeColumnsLayoutComponent,
     TwoColumnsLayoutComponent,
+    ModalBasicComponent,
+    ModalContentComponent,
 ];
 
 const PIPES = [
