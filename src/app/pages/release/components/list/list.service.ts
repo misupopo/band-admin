@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ListModel } from './list.model';
+import { ListModel, RemoveListModel } from './list.model';
 import { RequestManager } from '../../../../@theme/services';
 
 @Injectable()
@@ -9,5 +9,9 @@ export class ListDataService {
 
     public getListData = (listModel: ListModel) => {
         return this.requestManager.requestGetAction(listModel);
+    }
+
+    public removeListData = (removeListModel: RemoveListModel) => {
+        return this.requestManager.requestPostAction(removeListModel);
     }
 }

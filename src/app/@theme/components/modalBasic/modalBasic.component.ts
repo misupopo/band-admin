@@ -23,17 +23,7 @@ export class ModalBasicComponent {
         this.modalState.setModalRefData(this.modalService.open(content), event, switchData);
     }
 
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return  `with: ${reason}`;
-        }
-    }
-
     public close() {
-
+        this.modalState.setModalClose();
     }
 }

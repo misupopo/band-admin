@@ -4,7 +4,7 @@
     </nb-card-header>
     <modal-basic></modal-basic>
     <ng-template #content>
-        <ngbd-modal-content (listDelete)="listDelete($event)"></ngbd-modal-content>
+        <ngbd-modal-content (listRemove)="listRemove($event)"></ngbd-modal-content>
     </ng-template>
     <nb-card-body>
         <ng2-smart-table [settings]="settings" (userRowSelect)="onUserSelectRow($event)" [source]="source" (deleteConfirm)="onDeleteConfirm(content, $event)">

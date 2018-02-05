@@ -10,7 +10,7 @@ import { ModalState } from '../../../@core/share/modal.state';
 export class ModalContentComponent {
     public displayData: any = {};
     public contentSwitch: string = '';
-    @Output() listDelete = new EventEmitter();
+    @Output() listRemove = new EventEmitter();
 
     constructor(private modalState: ModalState) {
         const subscribeData = this.modalState.modalData.subscribe((data: any) => {
