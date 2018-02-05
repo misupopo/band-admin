@@ -1,20 +1,3 @@
-<!--<div [ngSwitch]="contentSwitch">-->
-    <!--<div *ngSwitchCase="'listRemove'" class="modal-header">-->
-        <!--<h4 class="modal-title">リストデータを削除しますか？</h4>-->
-        <!--<button type="button" class="close" aria-label="Close" (click)="close()">-->
-            <!--<span aria-hidden="true">&times;</span>-->
-        <!--</button>-->
-        <!--<div class="modal-body">-->
-            <!--<p>id: {{displayData.id}}</p>-->
-            <!--<p>articleTitle: {{displayData.articleTitle}}</p>-->
-        <!--</div>-->
-        <!--<div class="modal-footer">-->
-            <!--<button type="button" class="btn btn-hero-secondary" (click)="close()">いいえ</button>-->
-            <!--<button type="button" class="btn btn-hero-danger" (click)="eventEmitAction('listRemove')">はい</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
 <div class="modal-header" [ngSwitch]="contentSwitch">
     <div *ngSwitchCase="'listRemove'">
         <h4 class="modal-title">リストデータを削除しますか？</h4>

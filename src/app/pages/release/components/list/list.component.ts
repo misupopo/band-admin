@@ -1,4 +1,4 @@
-import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListDataService } from './list.service';
@@ -12,9 +12,7 @@ import { ModalBasicComponent } from '../../../../@theme/components/';
     templateUrl: './list.component.html',
 })
 export class ListComponent {
-
     @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
-
     public settings = {
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
