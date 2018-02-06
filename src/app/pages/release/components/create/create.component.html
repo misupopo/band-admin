@@ -66,10 +66,11 @@
                         </button>
                     </div>
                     <div class="mb-15" *ngFor="let discNumber of discNumberData">
-                        <input #discData
-                               type="text"
-                               class="form-control"
-                               (change)="changValue(discData.value, discNumber.id)">
+                        <select #discData class="form-control" (change)="changValue(discData.value, discNumber.id)">
+                            <option></option>
+                            <option>CD</option>
+                            <option>MV</option>
+                        </select>
                     </div>
                 </div>
             </div>

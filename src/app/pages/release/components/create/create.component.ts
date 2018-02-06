@@ -186,7 +186,7 @@ export class CreateComponent {
                 };
 
                 this.uploadInput.emit(event);
-                this.modalBasic.open(this.content, null, 'udpateComplete');
+                this.modalBasic.open(this.content, null, 'createComplete');
             },
             error => {
             });
