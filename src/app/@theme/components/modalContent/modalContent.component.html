@@ -24,5 +24,28 @@
             <button type="button" class="btn btn-hero-secondary" (click)="close()">OK</button>
         </div>
     </div>
+    <div *ngSwitchCase="'createComplete'">
+        <h4 class="modal-title">データの作成が完了しました</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-hero-secondary" (click)="close()">OK</button>
+        </div>
+    </div>
+    <div *ngSwitchCase="'updateComplete'">
+        <h4 class="modal-title">データの更新が完了しました</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-hero-secondary" (click)="close()">OK</button>
+        </div>
+    </div>
 </div>
+
 

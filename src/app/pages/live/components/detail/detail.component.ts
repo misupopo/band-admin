@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DetailDataService } from './detail.service';
 import { DetailModel, UpdateDetailModel } from './detail.model';
 import { DateManager} from '../../../../@theme/services';
+import { ModalBasicComponent } from "../../../../@theme/components";
 
 @Component({
     selector: 'ngx-detail',
@@ -22,6 +23,7 @@ export class DetailComponent {
     @Input('performerModel') performerModel: string;
     @Input('articleTitleModel') articleTitleModel: any;
     @Input('articleContentModel') articleContentModel: any;
+    @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -34,6 +36,7 @@ export class DetailComponent {
     public performer: AbstractControl;
     public articleTitle: AbstractControl;
     public articleContent: AbstractControl;
+    public content: any;
     private detailId: string;
 
     constructor(private detailDataService: DetailDataService,
@@ -103,6 +106,10 @@ export class DetailComponent {
         });
     }
 
+    public onClick(content) {
+        this.content = content;
+    }
+
     public onSubmit(values: any): void {
         if (this.form.valid) {
             const performers = values.performer.split(', ').reduce((collection, performerData) => {
@@ -127,6 +134,7 @@ export class DetailComponent {
                 },
                 action: 'live/detail',
             }).subscribe((response: any) => {
+                this.modalBasic.open(this.content, null, 'updateComplete');
             },
             error => {
             });

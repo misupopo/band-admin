@@ -2,6 +2,10 @@
     <nb-card-header>
         Create
     </nb-card-header>
+    <modal-basic></modal-basic>
+    <ng-template #content>
+        <ngbd-modal-content></ngbd-modal-content>
+    </ng-template>
     <nb-card-body>
         <form #f="ngForm" [formGroup]="form"
               (ngSubmit)="onSubmit(form.value)" novalidate>
@@ -194,7 +198,7 @@
                 </div>
             </div>
             <div class="text-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" (click)="onClick(content)">Submit</button>
             </div>
         </form>
     </nb-card-body>

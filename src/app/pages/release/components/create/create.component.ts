@@ -1,8 +1,9 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import {Component, EventEmitter, Input, ViewChild} from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { CreateDataService } from './create.service';
 import { CreateModel } from './create.model';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
+import { ModalBasicComponent } from "../../../../@theme/components";
 
 @Component({
     selector: 'ngx-create',
@@ -11,6 +12,7 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions }
 })
 export class CreateComponent {
     @ViewChild('imageLoader') imageLoader: any;
+    @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -42,6 +44,7 @@ export class CreateComponent {
             ],
         },
     ];
+    public content: any;
     options: UploaderOptions;
     formData: FormData;
     files: UploadFile[];
@@ -143,6 +146,10 @@ export class CreateComponent {
         this.musicListData[index].musicList[musicListIndex] = value;
     }
 
+    public onClick(content) {
+        this.content = content;
+    }
+
     public onSubmit(values: any): void {
         if (this.form.valid) {
 
@@ -179,6 +186,7 @@ export class CreateComponent {
                 };
 
                 this.uploadInput.emit(event);
+                this.modalBasic.open(this.content, null, 'udpateComplete');
             },
             error => {
             });

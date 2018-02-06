@@ -1,4 +1,4 @@
-import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalState } from '../../../@core/share/modal.state';
 
@@ -8,9 +8,10 @@ import { ModalState } from '../../../@core/share/modal.state';
     templateUrl: './modalContent.component.html'
 })
 export class ModalContentComponent {
+    @Input('content') content: any;
+    @Output() listRemove = new EventEmitter();
     public displayData: any = {};
     public contentSwitch: string = '';
-    @Output() listRemove = new EventEmitter();
 
     constructor(private modalState: ModalState) {
         const subscribeData = this.modalState.modalData.subscribe((data: any) => {

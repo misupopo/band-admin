@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { CreateDataService } from './create.service';
 import { CreateModel } from './create.model';
+import { ModalBasicComponent } from "../../../../@theme/components";
 
 @Component({
     selector: 'ngx-create',
@@ -9,6 +10,8 @@ import { CreateModel } from './create.model';
     templateUrl: './create.component.html',
 })
 export class CreateComponent {
+    @Input('content') content: any;
+    @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -51,6 +54,10 @@ export class CreateComponent {
         this.articleContent = this.form.controls['articleContent'];
     }
 
+    public onClick(content) {
+        this.content = content;
+    }
+
     public onSubmit(values: any): void {
         if (this.form.valid) {
 
@@ -75,6 +82,7 @@ export class CreateComponent {
                 },
                 action: 'live/create',
             }).subscribe((response: any) => {
+                this.modalBasic.open(this.content, null, 'createComplete');
             },
             error => {
             });
