@@ -71,38 +71,7 @@ export class DetailComponent {
 
         this.activatedRoute.params.subscribe((param: any) => {
             this.detailId = param.id;
-
-            this.getDetailData({
-                params: {
-                    id: this.detailId,
-                },
-                action: 'live/detail',
-            }).subscribe((response: any) => {
-                const detailData = response.result;
-
-                this.titleModel = detailData.title;
-                this.dateModel = this.dateManager.convertTime(new Date(detailData.date));
-                this.venueModel = detailData.venue;
-                this.informationModel = detailData.information;
-                this.enterTimeModel = this.dateManager.convertTime(new Date(detailData.enter_time));
-                this.startTimeModel = this.dateManager.convertTime(new Date(detailData.start_time));
-                this.advanceSaleTicketModel = detailData.advance_sale_ticket;
-                this.dayTicketModel = detailData.day_ticket;
-                this.articleTitleModel = detailData.article_title;
-                this.articleContentModel = detailData.article_content;
-
-                let performers = '';
-
-                detailData.performer.map((value) => {
-                    if (performers) {
-                        performers = (performers + ', ' + value);
-                    } else {
-                        performers = value;
-                    }
-                });
-
-                this.performerModel = performers;
-            });
+            this.detailDataLoad();
         });
     }
 
@@ -139,6 +108,40 @@ export class DetailComponent {
             error => {
             });
         }
+    }
+
+    private detailDataLoad() {
+        this.getDetailData({
+            params: {
+                id: this.detailId,
+            },
+            action: 'live/detail',
+        }).subscribe((response: any) => {
+            const detailData = response.result;
+
+            this.titleModel = detailData.title;
+            this.dateModel = this.dateManager.convertTime(new Date(detailData.date));
+            this.venueModel = detailData.venue;
+            this.informationModel = detailData.information;
+            this.enterTimeModel = this.dateManager.convertTime(new Date(detailData.enter_time));
+            this.startTimeModel = this.dateManager.convertTime(new Date(detailData.start_time));
+            this.advanceSaleTicketModel = detailData.advance_sale_ticket;
+            this.dayTicketModel = detailData.day_ticket;
+            this.articleTitleModel = detailData.article_title;
+            this.articleContentModel = detailData.article_content;
+
+            let performers = '';
+
+            detailData.performer.map((value) => {
+                if (performers) {
+                    performers = (performers + ', ' + value);
+                } else {
+                    performers = value;
+                }
+            });
+
+            this.performerModel = performers;
+        });
     }
 
     private getDetailData(detailModel: DetailModel) {

@@ -5,7 +5,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {AnalyticsService} from './@core/utils/analytics.service';
-
+import { LoadingSpinnerState } from './@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-app',
@@ -16,11 +16,15 @@ export class AppComponent implements OnInit {
 
     public loading = false;
 
-    constructor(private analytics: AnalyticsService) {
+    constructor(private analytics: AnalyticsService,
+                private loadingSpinnerState: LoadingSpinnerState) {
     }
 
     ngOnInit(): void {
         this.analytics.trackPageViews();
-        this.loading = false;
+
+        this.loadingSpinnerState.loadingSpinnerStateData.subscribe((state: any) => {
+            this.loading = state;
+        });
     }
 }

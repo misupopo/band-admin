@@ -11,7 +11,7 @@ import { ModalBasicComponent } from "../../../../@theme/components";
     styleUrls: ['./detail.component.scss'],
     templateUrl: './detail.component.html',
 })
-export class DetailComponent implements AfterViewInit {
+export class DetailComponent {
     @Input('titleModel') titleModel: string;
     @Input('dateModel') dateModel: string;
     @Input('typeModel') typeModel: string;
@@ -61,36 +61,10 @@ export class DetailComponent implements AfterViewInit {
         this.priceValue = this.form.controls['priceValue'];
         this.articleTitle = this.form.controls['articleTitle'];
         this.articleContent = this.form.controls['articleContent'];
-    }
 
-    ngAfterViewInit() {
         this.activatedRoute.params.subscribe((param: any) => {
             this.detailId = param.id;
-
-            this.getDetailData({
-                params: {
-                    id: this.detailId,
-                },
-                action: 'release/detail',
-            }).subscribe((response: any) => {
-                const detailData = response.result;
-
-                this.titleModel = detailData.title;
-                this.dateModel = this.dateManager.convertTime(new Date(detailData.date));
-                this.typeModel = detailData.type;
-                this.productNumberModel = detailData.product_number;
-                this.productTitleModel = detailData.product_title;
-                this.priceValueModel = detailData.price_value;
-                this.discNumberDataModel = detailData.disc_number;
-                this.musicListDataModel = detailData.music_list;
-                this.musicListData = detailData.music_list.map((data) => {
-                    return Object.assign([], data);
-                });
-
-                this.articleTitleModel = detailData.article_title;
-                this.articleContentModel = detailData.article_content;
-                this.fileName = detailData.file_name;
-            });
+            this.detailDataLoad();
         });
     }
 
@@ -158,6 +132,33 @@ export class DetailComponent implements AfterViewInit {
             error => {
             });
         }
+    }
+
+    private detailDataLoad() {
+        this.getDetailData({
+            params: {
+                id: this.detailId,
+            },
+            action: 'release/detail',
+        }).subscribe((response: any) => {
+            const detailData = response.result;
+
+            this.titleModel = detailData.title;
+            this.dateModel = this.dateManager.convertTime(new Date(detailData.date));
+            this.typeModel = detailData.type;
+            this.productNumberModel = detailData.product_number;
+            this.productTitleModel = detailData.product_title;
+            this.priceValueModel = detailData.price_value;
+            this.discNumberDataModel = detailData.disc_number;
+            this.musicListDataModel = detailData.music_list;
+            this.musicListData = detailData.music_list.map((data) => {
+                return Object.assign([], data);
+            });
+
+            this.articleTitleModel = detailData.article_title;
+            this.articleContentModel = detailData.article_content;
+            this.fileName = detailData.file_name;
+        });
     }
 
     private getDetailData(detailModel: DetailModel) {
