@@ -43,6 +43,15 @@ $border: #D2D6DA;
     }
 }
 
+.dropImageView {
+    height: auto;
+    padding: 15px;
+
+    img {
+        max-height: 250px;
+    }
+}
+
 .upload-items {
     display: block;
     width: 100%;
