@@ -8,6 +8,8 @@ import {SmartTableService} from './smart-table.service';
 import {PlayerService} from './player.service';
 import {RequestConfigService} from './request.service';
 
+import { AppConfigService } from '../../app.config.service';
+
 const SERVICES = [
     UserService,
     ElectricityService,
@@ -15,6 +17,7 @@ const SERVICES = [
     SmartTableService,
     PlayerService,
     RequestConfigService,
+    AppConfigService,
 ];
 
 @NgModule({

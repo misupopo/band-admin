@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { AppConfigService } from '../../app.config.service';
 
 @Injectable()
 export class RequestConfigService {
-
     private data = {
-        url: 'http://localhost:9001',
+        url: '',
     };
 
-    constructor() {
+    constructor(private appConfigService: AppConfigService) {
+        this.data.url = this.appConfigService.getConfigData().accessUrl;
     }
 
     public getRequestUrl (): string {
