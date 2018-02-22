@@ -108,6 +108,57 @@
                     </div>
                 </div>
             </div>
+            <label>CDジャケット</label>
+            <div class="input-group dis-i text-center">
+                <div class="previewImageBox mb-25">
+                    <img src="{{baseImageUrl + fileName}}"/>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="drop-container mb-20"
+                         ngFileDrop
+                         [options]="options"
+                         (uploadOutput)="onUploadOutput($event)"
+                         [uploadInput]="uploadInput">
+                        <p>
+                            Drag a file here or
+                            <label class="upload-button">
+                                <input type="file"
+                                       #imageLoader
+                                       ngFileSelect
+                                       [options]="options"
+                                       (uploadOutput)="onUploadOutput($event)"
+                                       [uploadInput]="uploadInput" multiple>
+                                browse
+                            </label>
+                            to upload.
+                        </p>
+                    </div>
+                    <div class="upload-items mb-20">
+                        <div class="upload-item" *ngFor="let file of files; let i = index;">
+                            <span class="filename">
+                                <span>{{ file.name }} ({{ file.id }}) - {{ file.progress?.data?.percentage }}%</span>
+                                <span>uploading with {{ file.progress?.data?.speedHuman }}</span>
+                                <span>ETA {{ file.progress?.data?.etaHuman }}</span>
+                            </span>
+                            <div class="progress mb-20">
+                                <span class="bar" [style.width]="file?.progress?.data?.percentage + '%'"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-right mb-20" [hidden]="!imagePreview">
+                        <button type="button"
+                                class="btn btn-primary btn-icon"
+                                (click)="removeFile(files[0].id)">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="drop-container text-center dropImageView" [hidden]="!imagePreview">
+                        <img src="{{imagePreview}}">
+                    </div>
+                </div>
+
+            </div>
             <label>記事タイトル</label>
             <div class="input-group">
                 <input type="text"

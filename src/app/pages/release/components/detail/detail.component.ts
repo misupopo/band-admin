@@ -1,10 +1,12 @@
-import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
+import {Component, Input, AfterViewInit, ViewChild, EventEmitter} from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DetailDataService } from './detail.service';
 import { DetailModel, UpdateDetailModel } from './detail.model';
 import { DateManager} from '../../../../@theme/services';
 import { ModalBasicComponent } from "../../../../@theme/components";
+import { AppConfigService } from '../../../../app.config.service';
+import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 
 @Component({
     selector: 'ngx-detail',
@@ -22,6 +24,7 @@ export class DetailComponent {
     @Input('articleTitleModel') articleTitleModel: any;
     @Input('articleContentModel') articleContentModel: any;
     @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
+    @ViewChild('imageLoader') imageLoader: any;
     public form: FormGroup;
     public title: AbstractControl;
     public date: AbstractControl;
@@ -37,11 +40,21 @@ export class DetailComponent {
     public fileName: string;
     public content: any;
     private detailId: string;
+    private baseImageUrl: string;
+    private baseAccessUrl: string;
+    options: UploaderOptions;
+    formData: FormData;
+    files: UploadFile[];
+    uploadInput: EventEmitter<UploadInput>;
+    humanizeBytes: Function;
+    dragOver: boolean;
+    imagePreview: any;
 
     constructor(private detailDataService: DetailDataService,
                 private formBuilder: FormBuilder,
                 private activatedRoute: ActivatedRoute,
-                private dateManager: DateManager) {
+                private dateManager: DateManager,
+                private appConfigService: AppConfigService) {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
@@ -66,6 +79,13 @@ export class DetailComponent {
             this.detailId = param.id;
             this.detailDataLoad();
         });
+
+        this.baseImageUrl = (this.appConfigService.getConfigData().accessUrl + '/images/');
+        this.baseAccessUrl = (this.appConfigService.getConfigData().accessUrl + '/');
+
+        this.files = []; // local uploading files array
+        this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
+        this.humanizeBytes = humanizeBytes;
     }
 
     public changValue(value, index) {
@@ -127,6 +147,17 @@ export class DetailComponent {
                 },
                 action: 'release/detail',
             }).subscribe((response: any) => {
+                const event: any = {
+                    type: 'uploadAll',
+                    url: this.baseAccessUrl + 'release/create/image',
+                    method: 'POST',
+                    data: {
+                        id: response.result[0]._id,
+                    },
+                };
+
+                this.uploadInput.emit(event);
+
                 this.modalBasic.open(this.content, null, 'updateComplete');
             },
             error => {
@@ -169,5 +200,56 @@ export class DetailComponent {
     private updateDetailData(updateDetailModel: UpdateDetailModel) {
         return this.detailDataService
             .updateDetailData(updateDetailModel);
+    }
+
+    onUploadOutput(output: UploadOutput): void {
+        // when all files added in queue
+        if (output.type === 'allAddedToQueue') {
+
+        } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') {
+            // add file to array when added
+            this.previewImage(output.file.nativeFile).then(response => {
+                // The image preview
+                this.imagePreview = response;
+                this.files.push(output.file);
+            });
+        } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
+            // update current data in files array for uploading file
+            const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
+            this.files[index] = output.file;
+        } else if (output.type === 'removed') {
+            // remove file from array when removed
+            this.files = this.files.filter((file: UploadFile) => file !== output.file);
+        } else if (output.type === 'dragOver') {
+            this.dragOver = true;
+        } else if (output.type === 'dragOut') {
+            this.dragOver = false;
+        } else if (output.type === 'drop') {
+            this.dragOver = false;
+        }
+    }
+
+    previewImage(file: any) {
+        const fileReader = new FileReader();
+        return new Promise(resolve => {
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function (e: any) {
+                resolve(e.target.result);
+            };
+        });
+    }
+
+    cancelUpload(id: string): void {
+        this.uploadInput.emit({ type: 'cancel', id: id });
+    }
+
+    removeFile(id: string): void {
+        this.uploadInput.emit({ type: 'remove', id: id });
+        this.imagePreview = null;
+        this.imageLoader.nativeElement.value = '';
+    }
+
+    removeAllFiles(): void {
+        this.uploadInput.emit({ type: 'removeAll' });
     }
 }

@@ -4,6 +4,7 @@ import { CreateDataService } from './create.service';
 import { CreateModel } from './create.model';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import { ModalBasicComponent } from "../../../../@theme/components";
+import { AppConfigService } from '../../../../app.config.service';
 
 @Component({
     selector: 'ngx-create',
@@ -45,6 +46,7 @@ export class CreateComponent {
         },
     ];
     public content: any;
+    private baseAccessUrl: string;
     options: UploaderOptions;
     formData: FormData;
     files: UploadFile[];
@@ -54,7 +56,8 @@ export class CreateComponent {
     imagePreview: any;
 
     constructor(private formBuilder: FormBuilder,
-                private createDataService: CreateDataService) {
+                private createDataService: CreateDataService,
+                private appConfigService: AppConfigService) {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
@@ -78,6 +81,8 @@ export class CreateComponent {
         this.files = []; // local uploading files array
         this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
         this.humanizeBytes = humanizeBytes;
+
+        this.baseAccessUrl = (this.appConfigService.getConfigData().accessUrl + '/');
     }
 
     public addDiscNumberData() {
@@ -178,7 +183,7 @@ export class CreateComponent {
             }).subscribe((response: any) => {
                 const event: any = {
                     type: 'uploadAll',
-                    url: 'http://localhost:9001/release/create/image',
+                    url: this.baseAccessUrl + 'release/create/image',
                     method: 'POST',
                     data: {
                         id: response.result.insertedIds[0],
