@@ -86,6 +86,9 @@ export class DetailComponent {
                 return collection;
             }, []);
 
+            console.log(values.enterTime);
+            console.log(this.dateManager.convertTime(new Date(values.enterTime)));
+
             this.updateDetailData({
                 params: {
                     id: this.detailId,
