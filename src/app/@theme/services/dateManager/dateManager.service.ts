@@ -22,7 +22,8 @@ export class DateManager {
 
     public convertTime(timeValue: Date) {
 
-        return moment(timeValue).utc().format('YYYY/MM/DD HH:mm:ss');
+        // return moment(timeValue).utc().format('YYYY/MM/DD HH:mm:ss');
+        return moment(timeValue).format('YYYY/MM/DD HH:mm:ss');
 
         // return sprintf('%d/%d/%d %02d:%02d:%02d',
         //     timeValue.getFullYear(),
