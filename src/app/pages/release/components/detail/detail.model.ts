@@ -19,6 +19,7 @@ export class UpdateDetailModel {
         article_title: string;
         article_content: string;
         file_name: string;
+        download: any;
     };
     public action: string;
 }

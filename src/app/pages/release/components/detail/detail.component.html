@@ -175,6 +175,78 @@
                           [formControl]="articleContent"
                           class="form-control"></textarea>
             </div>
+            <label>iTunes</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.itune"
+                       (keyup)="onKey($event, 'itune')"
+                       class="form-control">
+            </div>
+            <label>レコチョク</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.recochoku"
+                       (keyup)="onKey($event, 'recochoku')"
+                       class="form-control">
+            </div>
+            <label>kkbox</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.kkbox"
+                       (keyup)="onKey($event, 'kkbox')"
+                       class="form-control">
+            </div>
+            <label>mora</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.mora"
+                       (keyup)="onKey($event, 'mora')"
+                       class="form-control">
+            </div>
+            <label>music.jp</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.musicJp"
+                       (keyup)="onKey($event, 'musicJp')"
+                       class="form-control">
+            </div>
+            <label>google play</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.googlePlay"
+                       (keyup)="onKey($event, 'googlePlay')"
+                       class="form-control">
+            </div>
+            <label>LINE music</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.lineMusic"
+                       (keyup)="onKey($event, 'lineMusic')"
+                       class="form-control">
+            </div>
+            <label>OTOTOY</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.ototoy"
+                       (keyup)="onKey($event, 'ototoy')"
+                       class="form-control">
+            </div>
+            <label>amazon music</label>
+            <div class="input-group">
+                <input type="text"
+                       placeholder="URL"
+                       [value]="downloadList.amazonMusic"
+                       (keyup)="onKey($event, 'amazonMusic')"
+                       class="form-control">
+            </div>
             <div class="text-right">
                 <button type="submit" class="btn btn-hero-primary" (click)="onClick(content)">更新</button>
             </div>

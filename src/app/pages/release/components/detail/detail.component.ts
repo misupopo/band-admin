@@ -23,6 +23,15 @@ export class DetailComponent {
     @Input('musicDataModel') musicDataModel: any;
     @Input('articleTitleModel') articleTitleModel: any;
     @Input('articleContentModel') articleContentModel: any;
+    @Input('downloadITuneModel') downloadITuneModel: any;
+    @Input('downloadRecochokuModel') downloadRecochokuModel: any;
+    @Input('downloadKkboxModel') downloadKkboxModel: any;
+    @Input('downloadMoraModel') downloadMoraModel: any;
+    @Input('downloadMusicJpModel') downloadMusicJpModel: any;
+    @Input('downloadGooglePlayModel') downloadGooglePlayModel: any;
+    @Input('downloadLineMusicModel') downloadLineMusicModel: any;
+    @Input('downloadOtotoyModel') downloadOtotoyModel: any;
+    @Input('downloadAmazonMusicModel') downloadAmazonMusicModel: any;
     @ViewChild(ModalBasicComponent) modalBasic: ModalBasicComponent;
     @ViewChild('imageLoader') imageLoader: any;
     public form: FormGroup;
@@ -39,6 +48,17 @@ export class DetailComponent {
     public musicListData: any;
     public fileName: string;
     public content: any;
+    public downloadList: any = {
+        itune: '',
+        recochoku: '',
+        kkbox: '',
+        mora: '',
+        musicJp: '',
+        googlePlay: '',
+        lineMusic: '',
+        ototoy: '',
+        amazonMusic: '',
+    };
     private detailId: string;
     private baseImageUrl: string;
     private baseAccessUrl: string;
@@ -130,6 +150,7 @@ export class DetailComponent {
 
     public onSubmit(values: any): void {
         if (this.form.valid) {
+
             this.updateDetailData({
                 params: {
                     id: this.detailId,
@@ -144,6 +165,7 @@ export class DetailComponent {
                     article_title: this.articleTitleModel,
                     article_content: this.articleContentModel,
                     file_name: this.fileName,
+                    download: this.downloadList
                 },
                 action: 'release/detail',
             }).subscribe((response: any) => {
@@ -163,6 +185,11 @@ export class DetailComponent {
             error => {
             });
         }
+    }
+
+    public onKey(event, target) {
+        this.downloadList[target] = event.target.value;
+
     }
 
     private detailDataLoad() {
@@ -189,6 +216,10 @@ export class DetailComponent {
             this.articleTitleModel = detailData.article_title;
             this.articleContentModel = detailData.article_content;
             this.fileName = detailData.file_name;
+
+            Object.keys(detailData.download).forEach((key) => {
+                this.downloadList[key] = detailData.download[key];
+            });
         });
     }
 
