@@ -12,6 +12,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         group: true,
     },
     {
+        title: 'carousel',
+        icon: 'nb-star',
+        children: [
+            {
+                title: 'Create',
+                link: '/pages/carousel/create',
+            },
+            {
+                title: 'List',
+                link: '/pages/carousel/list',
+            },
+        ],
+    },
+    {
         title: 'live',
         icon: 'nb-star',
         children: [

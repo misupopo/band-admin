@@ -11,6 +11,9 @@ const routes: Routes = [{
         path: 'dashboard',
         component: DashboardComponent,
     }, {
+        path: 'carousel',
+        loadChildren: './carousel/carousel.module#CarouselModule',
+    }, {
         path: 'live',
         loadChildren: './live/live.module#LiveModule',
     }, {
