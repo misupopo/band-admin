@@ -24,8 +24,7 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
     value = 50;
     @Output('valueChange') valueChange = new EventEmitter<Number>();
 
-    @Input('value')
-    set setValue(value) {
+    @Input('value') set setValue(value) {
         this.value = value;
     }
 
@@ -129,7 +128,6 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
         this.bottomAngleRad = TemperatureDraggerComponent.toRad(this.bottomAngle);
         this.colors = (typeof this.fillColors === 'string') ? [this.fillColors] : this.fillColors;
 
-        const baseRadius: number = VIEW_BOX_SIZE / 2;
         const halfAngle = this.bottomAngleRad / 2;
 
         const svgBoundingRect = this.svgRoot.nativeElement.getBoundingClientRect();
@@ -145,8 +143,8 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
 
 
         const circleFactor = this.bottomAngleRad <= Math.PI
-            ? ( 2 / (1 + Math.cos(halfAngle)) )
-            : ( 2 * Math.sin(halfAngle) / (1 + Math.cos(halfAngle)) );
+            ? (2 / (1 + Math.cos(halfAngle)))
+            : (2 * Math.sin(halfAngle) / (1 + Math.cos(halfAngle)));
         if (circleFactor > svgAreaFactor) {
             if (this.bottomAngleRad > Math.PI) {
                 this.radius = (VIEW_BOX_SIZE - 2 * thumbMargin) / (2 * Math.sin(halfAngle));

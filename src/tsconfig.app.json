@@ -5,6 +5,7 @@
         "module": "es2015",
         "baseUrl": "./",
         "types": [],
+        "allowSyntheticDefaultImports": true,
         "paths": {
             "@angular/*": [
                 "../node_modules/@angular/*"

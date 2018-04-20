@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
-import {AngularEchartsModule} from 'ngx-echarts';
+
+import {NgxEchartsModule} from 'ngx-echarts';
 
 import {ThemeModule} from '../../@theme/theme.module';
 import {DashboardComponent} from './dashboard.component';
@@ -24,7 +25,7 @@ import {TrafficChartComponent} from './traffic/traffic-chart.component';
 @NgModule({
     imports: [
         ThemeModule,
-        AngularEchartsModule,
+        NgxEchartsModule,
     ],
     declarations: [
         DashboardComponent,

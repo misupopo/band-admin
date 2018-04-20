@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import camelcase from 'camel-case';
-import snakeCase from 'snake-case';
+import * as changeCase from 'change-case';
 
 @Injectable()
 export class CamelcaseConverter {
-
     public convertForCamelcase(value: string) {
-        return camelcase(value);
+        return changeCase.camelCase(value);
     }
 
     public convertForSnakeCase(value: string) {
-        return snakeCase(value);
+        return changeCase.snakeCase(value);
     }
 }

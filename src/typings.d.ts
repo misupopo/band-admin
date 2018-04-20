@@ -16,3 +16,5 @@ declare var tinymce: any;
 declare var echarts: any;
 
 declare var moment: any;
+
+declare module 'snakeCase';

@@ -1,4 +1,5 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +17,11 @@ import {
     NbThemeModule,
     NbUserModule,
     NbCheckboxModule,
+    NbPopoverModule,
+    NbContextMenuModule,
 } from '@nebular/theme';
+
+import {NbSecurityModule} from '@nebular/security';
 
 import {
     FooterComponent,
@@ -56,7 +61,10 @@ const NB_MODULES = [
     NbSearchModule,
     NbSidebarModule,
     NbCheckboxModule,
+    NbPopoverModule,
+    NbContextMenuModule,
     NgbModule,
+    NbSecurityModule, // *nbIsGranted directive
 ];
 
 const SERVICES = [
@@ -99,7 +107,7 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-    imports: [...BASE_MODULES, ...NB_MODULES],
+    imports: [...BASE_MODULES, ...NB_MODULES, HttpClientModule],
     exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
     declarations: [...COMPONENTS, ...PIPES],
 })
@@ -107,10 +115,7 @@ export class ThemeModule {
     static forRoot(): ModuleWithProviders {
         return <ModuleWithProviders>{
             ngModule: ThemeModule,
-            providers: [
-                ...NB_THEME_PROVIDERS,
-                ...SERVICES,
-            ],
+            providers: [...NB_THEME_PROVIDERS, ...SERVICES,],
         };
     }
 }
