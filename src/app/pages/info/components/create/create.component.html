@@ -1,0 +1,108 @@
+<nb-card>
+    <nb-card-header>
+        Create
+    </nb-card-header>
+    <modal-basic></modal-basic>
+    <ng-template #content>
+        <ngbd-modal-content></ngbd-modal-content>
+    </ng-template>
+    <nb-card-body>
+        <form #f="ngForm" [formGroup]="form"
+              (ngSubmit)="onSubmit(form.value)" novalidate>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">タイトル</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="title"
+                           class="form-control"
+                           name="title"
+                           placeholder="title">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">日付</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="date"
+                           class="form-control"
+                           name="date"
+                           placeholder="date">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">記事タイトル</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           [formControl]="articleTitle"
+                           class="form-control"
+                           name="articleTitle"
+                           placeholder="articleTitle">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">記事内容</label>
+                <div class="col-sm-9">
+                    <textarea type="text"
+                              [formControl]="articleContent"
+                              class="form-control"
+                              name="articleContent"
+                              placeholder="articleContent"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">記事画像</label>
+                <div class="col-sm-9">
+                    <div class="drop-container mb-20"
+                         ngFileDrop
+                         [options]="options"
+                         (uploadOutput)="onUploadOutput($event)"
+                         [uploadInput]="uploadInput">
+                        <p>
+                            Drag a file here or
+                            <label class="upload-button">
+                                <input type="file"
+                                       #imageLoader
+                                       ngFileSelect
+                                       [options]="options"
+                                       (uploadOutput)="onUploadOutput($event)"
+                                       [uploadInput]="uploadInput" multiple>
+                                browse
+                            </label>
+                            to upload.
+                        </p>
+                    </div>
+                    <div class="upload-items mb-20">
+                        <div class="upload-item" *ngFor="let file of files; let i = index;">
+                            <span class="filename">
+                                <span>{{ file.name }} ({{ file.id }}) - {{ file.progress?.data?.percentage }}%</span>
+                                <span>uploading with {{ file.progress?.data?.speedHuman }}</span>
+                                <span>ETA {{ file.progress?.data?.etaHuman }}</span>
+                            </span>
+                            <div class="progress mb-20">
+                                <span class="bar" [style.width]="file?.progress?.data?.percentage + '%'"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let image of imagePreview; let i = index;" [hidden]="imagePreview.length <= 0">
+                        <div class="flex-right mb-20" >
+                            <button type="button"
+                                    class="btn btn-primary btn-icon"
+                                    (click)="removeFile(files[i].id, i)">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <div class="drop-container text-center dropImageView">
+                            <img src="{{image}}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary" (click)="onClick(content)">Submit</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

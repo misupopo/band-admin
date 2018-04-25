@@ -14,6 +14,9 @@ const routes: Routes = [{
         path: 'carousel',
         loadChildren: './carousel/carousel.module#CarouselModule',
     }, {
+        path: 'info',
+        loadChildren: './info/info.module#InfoModule',
+    }, {
         path: 'live',
         loadChildren: './live/live.module#LiveModule',
     }, {
