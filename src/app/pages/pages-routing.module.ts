@@ -23,6 +23,9 @@ const routes: Routes = [{
         path: 'release',
         loadChildren: './release/release.module#ReleaseModule',
     }, {
+        path: 'recruitment',
+        loadChildren: './recruitment/recruitment.module#RecruitmentModule',
+    }, {
         path: 'ui-features',
         loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
     }, {

@@ -1,0 +1,53 @@
+<nb-card>
+    <nb-card-header>
+        Detail
+    </nb-card-header>
+    <modal-basic></modal-basic>
+    <ng-template #content>
+        <ngbd-modal-content></ngbd-modal-content>
+    </ng-template>
+    <nb-card-body *ngIf="redisData">
+        <form #f="ngForm" [formGroup]="form"
+              (ngSubmit)="onSubmit(form.value)" novalidate>
+            <div *ngFor="let redis of redisData">
+                <label>{{redis.key}}</label>
+                <div class="input-group">
+                <input type="text"
+                       (change)="onValueChange(redis.key, $event)"
+                       [(value)]="redis.value"
+                       class="form-control">
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-hero-primary" (click)="onClick(content)">更新</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-header>
+        pm2
+    </nb-card-header>
+    <nb-card-body *ngIf="pm2Data && pm2Data.app">
+        <div class="mb-15">名前</div>
+        <div class="mb-15">{{pm2Data.app.appName}}</div>
+        <div class="mb-15">ステータス</div>
+        <div class="mb-15">{{pm2Data.app.status}}</div>
+    </nb-card-body>
+    <nb-card-body *ngIf="pm2Data && pm2Data.configSet">
+        <div class="mb-15">名前</div>
+        <div class="mb-15">{{pm2Data.configSet.appName}}</div>
+        <div class="mb-15">ステータス</div>
+        <div class="mb-15">{{pm2Data.configSet.status}}</div>
+        <div class="input-group">
+            <select class="form-control" (change)="onPm2ValueChange(pm2Data.configSet.appName, $event)">
+                <option [value]="'start'">開始する</option>
+                <option [value]="'stop'">停止する</option>
+                <option [value]="'restart'">リスタート</option>
+            </select>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-hero-primary" (click)="onChangePm2Status()">PM2を更新</button>
+        </div>
+    </nb-card-body>
+</nb-card>
