@@ -1,10 +1,11 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DetailDataService } from './detail.service';
 import { DetailModel, UpdateDetailModel } from './detail.model';
 import { DateManager} from '../../../../@theme/services';
 import { ModalBasicComponent } from "../../../../@theme/components";
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-detail',
@@ -42,7 +43,8 @@ export class DetailComponent {
     constructor(private detailDataService: DetailDataService,
                 private formBuilder: FormBuilder,
                 private activatedRoute: ActivatedRoute,
-                private dateManager: DateManager) {
+                private dateManager: DateManager,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
@@ -86,9 +88,6 @@ export class DetailComponent {
                 return collection;
             }, []);
 
-            console.log(values.enterTime);
-            console.log(this.dateManager.convertTime(new Date(values.enterTime)));
-
             this.updateDetailData({
                 params: {
                     id: this.detailId,
@@ -109,6 +108,7 @@ export class DetailComponent {
                 this.modalBasic.open(this.content, null, 'updateComplete');
             },
             error => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
             });
         }
     }
@@ -144,6 +144,9 @@ export class DetailComponent {
             });
 
             this.performerModel = performers;
+        },
+        error => {
+            this.loadingSpinnerState.setLoadingSpinnerState(false);
         });
     }
 

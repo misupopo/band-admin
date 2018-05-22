@@ -5,6 +5,7 @@ import { ListDataService } from './list.service';
 import { ListModel, RemoveListModel } from './list.model';
 import { CamelcaseConverter, DateManager} from '../../../../@theme/services';
 import { ModalBasicComponent } from "../../../../@theme/components";
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-list',
@@ -73,7 +74,8 @@ export class ListComponent {
     constructor(private listDataService: ListDataService,
                 private camelcaseConverter: CamelcaseConverter,
                 private dateManager: DateManager,
-                private router: Router) {
+                private router: Router,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.listDataLoad();
     }
 
@@ -102,6 +104,7 @@ export class ListComponent {
             this.listDataLoad();
         },
         error => {
+            this.loadingSpinnerState.setLoadingSpinnerState(false);
         });
     }
 
@@ -124,6 +127,7 @@ export class ListComponent {
             this.source.load(this.dateManager.allListConvert(result));
         },
         error => {
+            this.loadingSpinnerState.setLoadingSpinnerState(false);
         });
     }
 

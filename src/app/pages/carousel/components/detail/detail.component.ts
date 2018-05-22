@@ -7,6 +7,7 @@ import { DateManager} from '../../../../@theme/services';
 import { ModalBasicComponent } from '../../../../@theme/components';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import { AppConfigService } from "../../../../app.config.service";
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-detail',
@@ -48,7 +49,8 @@ export class DetailComponent {
                 private formBuilder: FormBuilder,
                 private activatedRoute: ActivatedRoute,
                 private dateManager: DateManager,
-                private appConfigService: AppConfigService) {
+                private appConfigService: AppConfigService,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.form = formBuilder.group({
             'type': '',
             'title': '',
@@ -109,6 +111,7 @@ export class DetailComponent {
                 this.modalBasic.open(this.content, null, 'updateComplete');
             },
             error => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
             });
         }
     }

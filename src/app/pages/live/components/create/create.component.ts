@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { CreateDataService } from './create.service';
 import { CreateModel } from './create.model';
 import { ModalBasicComponent } from "../../../../@theme/components";
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-create',
@@ -26,7 +27,8 @@ export class CreateComponent {
     public articleContent: AbstractControl;
 
     constructor(private formBuilder: FormBuilder,
-                private createDataService: CreateDataService) {
+                private createDataService: CreateDataService,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
@@ -85,6 +87,7 @@ export class CreateComponent {
                 this.modalBasic.open(this.content, null, 'createComplete');
             },
             error => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
             });
         }
     }

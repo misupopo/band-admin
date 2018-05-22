@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, ViewChild} from '@angular/core';
+import { Component, EventEmitter, Input, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { CreateDataService } from './create.service';
 import { CreateModel } from './create.model';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import { ModalBasicComponent } from "../../../../@theme/components";
 import { AppConfigService } from '../../../../app.config.service';
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-create',
@@ -57,7 +58,8 @@ export class CreateComponent {
 
     constructor(private formBuilder: FormBuilder,
                 private createDataService: CreateDataService,
-                private appConfigService: AppConfigService) {
+                private appConfigService: AppConfigService,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
@@ -194,6 +196,7 @@ export class CreateComponent {
                 this.modalBasic.open(this.content, null, 'createComplete');
             },
             error => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
             });
         }
     }

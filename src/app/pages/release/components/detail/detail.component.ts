@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewInit, ViewChild, EventEmitter} from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DetailDataService } from './detail.service';
@@ -7,6 +7,7 @@ import { DateManager} from '../../../../@theme/services';
 import { ModalBasicComponent } from "../../../../@theme/components";
 import { AppConfigService } from '../../../../app.config.service';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-detail',
@@ -74,7 +75,8 @@ export class DetailComponent {
                 private formBuilder: FormBuilder,
                 private activatedRoute: ActivatedRoute,
                 private dateManager: DateManager,
-                private appConfigService: AppConfigService) {
+                private appConfigService: AppConfigService,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.form = formBuilder.group({
             'title': '',
             'date': '',
@@ -183,6 +185,7 @@ export class DetailComponent {
                 this.modalBasic.open(this.content, null, 'updateComplete');
             },
             error => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
             });
         }
     }
@@ -220,6 +223,9 @@ export class DetailComponent {
             Object.keys(detailData.download).forEach((key) => {
                 this.downloadList[key] = detailData.download[key];
             });
+        },
+        error => {
+            this.loadingSpinnerState.setLoadingSpinnerState(false);
         });
     }
 

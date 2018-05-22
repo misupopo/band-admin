@@ -5,6 +5,7 @@ import { DetailDataService } from './detail.service';
 import { DetailModel, UpdateDetailModel, UpdatePm2DetailModel } from './detail.model'
 import { DateManager} from '../../../../@theme/services';
 import { ModalBasicComponent } from "../../../../@theme/components";
+import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
     selector: 'ngx-detail',
@@ -37,7 +38,8 @@ export class DetailComponent {
     constructor(private detailDataService: DetailDataService,
                 private formBuilder: FormBuilder,
                 private activatedRoute: ActivatedRoute,
-                private dateManager: DateManager) {
+                private dateManager: DateManager,
+                private loadingSpinnerState: LoadingSpinnerState) {
         this.detailDataLoad();
     }
 
@@ -61,6 +63,7 @@ export class DetailComponent {
             this.modalBasic.open(this.content, null, 'updateComplete');
         },
         error => {
+            this.loadingSpinnerState.setLoadingSpinnerState(false);
         });
     }
 
@@ -80,6 +83,7 @@ export class DetailComponent {
                 this.modalBasic.open(this.content, null, 'updateComplete');
             },
             error => {
+                this.loadingSpinnerState.setLoadingSpinnerState(false);
             });
         }
     }
@@ -105,6 +109,9 @@ export class DetailComponent {
             this.pm2Data = response.pm2;
 
             this.form = this.formBuilder.group(formGroupData);
+        },
+        error => {
+            this.loadingSpinnerState.setLoadingSpinnerState(false);
         });
     }
 
