@@ -99,7 +99,7 @@
         "karma-jasmine-html-reporter": "0.2.2",
         "moment": "^2.20.1",
         "ngx-uploader": "^4.2.1",
-        "node-sass": "4.8.1",
+        "node-sass": "^4.9.3",
         "npm-run-all": "4.0.2",
         "protractor": "5.1.2",
         "rimraf": "2.6.1",
