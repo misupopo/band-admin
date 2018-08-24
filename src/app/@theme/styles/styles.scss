@@ -13,6 +13,10 @@
 
 @import './bootstrap-rtl';
 
+@import './helper';
+@import './titleLabel';
+@import './uploadImage';
+
 // install the framework and custom global styles
 @include nb-install() {
 
