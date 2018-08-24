@@ -4,7 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ListDataService } from './list.service';
 import { ListModel, RemoveListModel } from './list.model';
 import { CamelcaseConverter, DateManager} from '../../../../@theme/services';
-import { ModalBasicComponent } from "../../../../@theme/components";
+import { ModalBasicComponent } from '../../../../@theme/components';
 import { LoadingSpinnerState } from '../../../../@core/share/loadingSpinner.state';
 
 @Component({
@@ -71,7 +71,7 @@ export class ListComponent {
     public listRemove(data) {
         this.removeListData({
             params: {
-                id: data.id
+                id: data.id,
             },
             action: 'info/remove',
         }).subscribe((response: any) => {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { LoadingSpinnerState } from '../../../@core/share/loadingSpinner.state';
 import { RequestConfigService } from '../../../@core/data/request.service';
+import 'rxjs/Rx';
 
 @Injectable()
 export class RequestManager {
@@ -17,12 +18,9 @@ export class RequestManager {
         this.loadingSpinnerState.setLoadingSpinnerState(true);
 
         return this.http.post(this.requestUrl + '/' + postData.action, postData)
-        .map((response: Response) => {
+        .do((json) => {
             this.loadingSpinnerState.setLoadingSpinnerState(false);
-            return response.json();
-        })
-        .do((response) => {
-
+            return json;
         });
     }
 

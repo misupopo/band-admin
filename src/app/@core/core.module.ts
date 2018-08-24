@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NbAuthModule, NbDummyAuthProvider} from '@nebular/auth';
+import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
 import {NbSecurityModule, NbRoleProvider} from '@nebular/security';
 import {of as observableOf} from 'rxjs/observable/of';
 
@@ -27,21 +27,24 @@ const socialLinks = [
     },
 ];
 
-const NB_CORE_PROVIDERS = [
+export class NbSimpleRoleProvider extends NbRoleProvider {
+    getRole() {
+        // here you could provide any role based on any auth flow
+        return observableOf('guest');
+    }
+}
+
+export const NB_CORE_PROVIDERS = [
     ...DataModule.forRoot().providers,
     ...ShareModule.forRoot().providers,
     ...NbAuthModule.forRoot({
-        providers: {
-            email: {
-                service: NbDummyAuthProvider,
-                config: {
-                    delay: 3000,
-                    login: {
-                        rememberMe: true,
-                    },
-                },
-            },
-        },
+
+        strategies: [
+            NbDummyAuthStrategy.setup({
+                name: 'email',
+                delay: 3000,
+            }),
+        ],
         forms: {
             login: {
                 socialLinks: socialLinks,
@@ -51,6 +54,7 @@ const NB_CORE_PROVIDERS = [
             },
         },
     }).providers,
+
     NbSecurityModule.forRoot({
         accessControl: {
             guest: {
@@ -64,13 +68,9 @@ const NB_CORE_PROVIDERS = [
             },
         },
     }).providers,
+
     {
-        provide: NbRoleProvider,
-        useValue: {
-            getRole: () => {
-                return observableOf('guest'); // here you could provide any role based on any auth flow
-            },
-        },
+        provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
     },
     AnalyticsService,
 ];

@@ -83,7 +83,7 @@ export class ListComponent {
     public listRemove(data) {
         this.removeListData({
             params: {
-                id: data.id
+                id: data.id,
             },
             action: 'release/remove',
         }).subscribe((response: any) => {
